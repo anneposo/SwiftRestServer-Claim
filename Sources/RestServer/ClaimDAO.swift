@@ -5,14 +5,16 @@
 //  Created by anneposo on 10/24/20.
 //
 
+import SQLite3
+
 struct Claim : Codable {
     // define properties then initialize values with initializer (init)
-    var id : String?
+    var id : String
     var title : String?
     var date : String
     var isSolved : Int
     
-    init(i: String?, t: String?, d: String, solve: Int) {
+    init(i: String, t: String?, d: String, solve: Int) {
         id = i
         title = t
         date = d
@@ -24,7 +26,7 @@ struct Claim : Codable {
 class ClaimDAO {
     // submits sql statement to database for adding record to table
     func addPerson(cObj : Claim) {
-        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', '%@')", cObj.id!, cObj.title!, cObj.date, cObj.isSolved)
+        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', '%@')", cObj.id, cObj.title!, cObj.date, cObj.isSolved)
         
         // get database connection
         let conn = Database.getInstance().getDBConnection()
