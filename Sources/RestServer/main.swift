@@ -3,7 +3,7 @@ import Cocoa
 
 let router = Router()
 
-//router.all("/PersonService/add", middleware: BodyParser())
+router.all("/ClaimService/add", middleware: BodyParser())
 
 let dbObj = Database.getInstance()
 
@@ -21,7 +21,7 @@ router.post("/ClaimService/add") {
             ClaimDAO().addClaim(cObj: cObj)
         }
     }
-    response.send("The Person record was successfully inserted (via POST method).")
+    response.send("The Claim record was successfully inserted via POST method.")
     next()
 }
 /*

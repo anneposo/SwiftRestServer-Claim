@@ -26,15 +26,7 @@ struct Claim : Codable {
 class ClaimDAO {
     // submits sql statement to database for adding record to table
     func addClaim(cObj : Claim) {
-        // convert isSolved boolean to int
-        var isSolved : Int
-        if cObj.isSolved == false {
-            isSolved = 0
-        } else {
-            isSolved = 1
-        }
-        
-        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', '%@')", cObj.id, cObj.title!, cObj.date!, isSolved)
+        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', 0)", cObj.id, cObj.title!, cObj.date!)
         
         // get database connection
         let conn = Database.getInstance().getDBConnection()

@@ -26,7 +26,7 @@ class Database {
     }
     
     private func initializeDB() {
-        let sqlStmt = "create table if not exists claim (id text, title text, date text, isSolved int)"
+        let sqlStmt = "create table if not exists claim (id text, title text, date text, isSolved integer)"
         // catch + print any errors trying to execute the sqlstmt
         if sqlite3_exec(conn, sqlStmt, nil, nil, nil) != SQLITE_OK {
             let errcode = sqlite3_errcode(conn)
