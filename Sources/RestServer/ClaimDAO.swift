@@ -26,7 +26,15 @@ struct Claim : Codable {
 class ClaimDAO {
     // submits sql statement to database for adding record to table
     func addClaim(cObj : Claim) {
-        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', '%@')", cObj.id, cObj.title!, cObj.date!, cObj.isSolved)
+        // convert isSolved boolean to int
+        var isSolved : Int
+        if cObj.isSolved == false {
+            isSolved = 0
+        } else {
+            isSolved = 1
+        }
+        
+        let sqlStmt = String(format:"insert into claim (id, title, date, isSolved) values ('%@', '%@', '%@', '%@')", cObj.id, cObj.title!, cObj.date!, isSolved)
         
         // get database connection
         let conn = Database.getInstance().getDBConnection()
@@ -34,7 +42,7 @@ class ClaimDAO {
         // submits the insert sqlStmt and catches any errors trying to execute sqlStmt
         if sqlite3_exec(conn, sqlStmt, nil, nil, nil) != SQLITE_OK {
             let errcode = sqlite3_errcode(conn)
-            print("Failed to insert a Person record due to error \(errcode)")
+            print("Failed to insert a Claim record due to error \(errcode)")
         }
         sqlite3_close(conn) // close db connection
     }
