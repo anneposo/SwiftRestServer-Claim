@@ -24,43 +24,20 @@ router.post("/ClaimService/add") {
     response.send("The Claim record was successfully inserted via POST method.")
     next()
 }
-/*
-router.get("/PersonService/getAll") {
+
+router.get("/ClaimService/getAll") {
     request, response, next in
-    
     // returns all rows of data from database table
-    let pList = PersonDAO().getAll()
+    let cList = ClaimDAO().getAll()
     
     // JSON Serialization
-    let jsonData : Data = try JSONEncoder().encode(pList)
-    let jsonStr = String(data: jsonData, encoding: .utf8) // converts json Data to a string
-    // sends/prints Person DB records as json format (outputs as array of JSON objects)
-    response.send(jsonStr)
+    let jsonData : Data = try JSONEncoder().encode(cList)
+    let jsonStr = String(data: jsonData, encoding: .utf8)
     
-    // prints list of Person records
-    //response.send("getAll service response data : \(pList.description)")
+    response.send(jsonStr)
     next()
 }
 
-// gets parameters via URL
-router.get("/PersonService/add") {
-    request, response, next in   // closure syntax
-    
-    let fn = request.queryParameters["FirstName"]
-    let ln = request.queryParameters["LastName"]
-    
-    // let n = ...
-    // if n != nil, then do ...
-    // checks if SSN has a value (not nil), then
-    if let n = request.queryParameters["SSN"] {
-        let pObj = Person(fn: fn, ln: ln, n: n)
-        PersonDAO().addPerson(pObj: pObj)
-        response.send("The Person record was successfully inserted")
-    } else {
-        
-    }
-    next()
-}*/
 
 // port number your server will listen to, using object "router"
 Kitura.addHTTPServer(onPort: 8020, with: router)
