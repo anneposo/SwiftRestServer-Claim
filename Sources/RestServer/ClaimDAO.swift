@@ -10,9 +10,9 @@ struct Claim : Codable {
     var id : String?
     var title : String?
     var date : String
-    var isSolved : String
+    var isSolved : Int
     
-    init(i: String?, t: String?, d: String, solve: String) {
+    init(i: String?, t: String?, d: String, solve: Int) {
         id = i
         title = t
         date = d
